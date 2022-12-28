@@ -355,13 +355,15 @@
                     </thead>
                     <tbody>
                      
-                        @foreach($data as $dataValue) {
+                        @foreach($data as $dataValue) 
                         
                             <tr>
 
-    
+                                <?php
+                                    $id_image = $dataValue->idNumber;
+                                ?>
                                 <td class="center">
-                                  <img src="{{ asset($dataValue->idImage) }}" width= '50' height='50' class="img img-responsive" />
+                                <img src="{{ URL('storage/'.$dataValue->idImage) }}" width= '200' height='200' class="img img-responsive" />
                                 </td>
                                 <td class="center">{{ $dataValue->idNumber }}</td>
                                 <td class="center">{{ $dataValue->name }}</td>

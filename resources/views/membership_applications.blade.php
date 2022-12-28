@@ -36,13 +36,13 @@
         <div id="notifDiv"></div>
 		<div class="wrapper">
 			<div class="inner">
-				<form id="reg" action="" method="post" enctype="multipart/form-data">
+				<form id="membershipApplicationForm" action="" method="post" enctype="multipart/form-data">
                      
 
 					<h3>Membership Application</h3>
 					<div class = "alert alert-success" id="success_message"></div>
     
-					<div class = "alert alert-danger form-group">
+					<div class = "alert alert-warning form-group">
 						<ul id="saveform_errList"></ul>
 					</div> 
 
@@ -52,10 +52,10 @@
 					</div>
 					<div class="form-holder">
 						<span class="lnr lnr-user"></span>
-						<input type="number" name="nid" class="idNumber form-control" placeholder="National ID Number   (Attach ID )" required number>
+						<input type="number" name="idNumber" class="idNumber form-control" placeholder="National ID Number   (Attach ID )" required number>
 					</div>
 					<div class="mb-3">
-						<input class="idImage form-control form-control-sm" id="formFileSm" type="file">
+						<input class="idImage form-control form-control-sm" name="idImage" type="file">
 					</div>
 					<div class="form-holder">
 						<span class="lnr lnr-envelope"></span>
@@ -68,11 +68,11 @@
 					<div class="form-holder">
 						<span class="lnr lnr-user"></span>
 						<input type="text" name="churchMembershipNumber" accept=".png,.gif,.png" class="churchMembershipNumber form-control" placeholder="Church Membership Number" required>
-					</div>
+					</div> 
 					<div class="form-holder">
 						<span class="lnr lnr-select"></span>
 						<div class="form-holder">
-							<select class="department form-select" aria-label="Default select example">
+							<select class="department form-select" name="department" aria-label="Default select example">
 								<option selected>Department of Participation</option>
 								<option value="men">Men</option>
 								<option value="wwk">WWK</option>
@@ -92,10 +92,9 @@
 				</form>
 				<script>
 					$(document).ready(function() {
-						$(document).on('click', '.save_form', function(e){
+						$(document).on('submit', '#membershipApplicationForm', function(e){
 							e.preventDefault();
-						
-
+						/*
 						var data = {
 							'name': $('.name').val(),
 							'idNumber': $('.idNumber').val(),
@@ -105,8 +104,10 @@
 							'churchMembershipNumber': $('.churchMembershipNumber').val(),
 							'department': $('.department').val(),
 							'service': $('.service').val(),
-						}
+						}*/
 						//console.log(data);
+
+						let formData = new FormData($('#membershipApplicationForm')[0]);
 
 						$.ajaxSetup({
 							headers: {
@@ -115,23 +116,26 @@
 						});
 						$.ajax({
 							type: "POST",
-							url: "",
-							data: data,
+							url: "/membership_applications",
+							data: formData,
 							dataType: "json",
+							contentType: false,
+							processData: false,
+
 							success: function (response){
 								//console.log(response);
 								if(response.status == 400)
 								{
 									$('#saveform_errList').html("");
-									$('#saveform_errList').addClass('alert alert-danger');
+									$('#saveform_errList').removeClass('alert alert-danger');
 									$.each(response.errors, function (key, err_values){
 										$('#saveform_errList').append('<li>'+err_values+'</li>');
 									});
 								}
-								else{
+								else if(response.status == 200){
 									
 									$('#saveform_errList').html("");
-									$("#reg")[0].reset();
+									$("#membershipApplicationForm")[0].reset();
 									$('#success_message').addClass('alert alert-success');
 									$('#success_message').text(response.message);
 
