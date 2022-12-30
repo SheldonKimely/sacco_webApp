@@ -44,6 +44,7 @@ class MembershipApplications extends Controller
             $membershipApplication->churchMembershipNumber = $request->input('churchMembershipNumber');
             $membershipApplication->department = $request->input('department');
             $membershipApplication->service = $request->input('service');
+            $membershipApplication->status = 'pending';
 
             if($request->hasFile('idImage'))
             {

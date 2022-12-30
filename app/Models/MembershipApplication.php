@@ -19,5 +19,6 @@ class MembershipApplication extends Model
         'churchMembershipNumber',
         'department',
         'service',
+        'status',
     ];
 }
