@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Member;
-use Hash;
+use Illuminate\Support\Facades\Hash;
+
+// use Hash;
 
 class MemberRegistration extends Controller
 {

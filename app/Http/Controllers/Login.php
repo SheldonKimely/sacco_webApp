@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Member;
 use App\Models\Manager;
-Use Hash;
+// Use Hash;
 
 class Login extends Controller
 {
