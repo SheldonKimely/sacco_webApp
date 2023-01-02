@@ -36,17 +36,17 @@ Route::get("view_repayments", [ViewRepayments::class,'index']);
 Route::get("borrowed_loans", [BorrowedLoans::class,'index']);
 Route::get("contribute", [Contribute::class,'index']);
 Route::get("member_shares", [MemberShares::class,'index']);
-Route::post('/register-member',[MemberRegistration::Class,'registerMember'])->name ('register-member');
-Route::post('/login-user',[Login::Class,'loginUser'])->name ('login-user');
+Route::post('/register-member',[MemberRegistration::class,'registerMember'])->name ('register-member');
+Route::post('/login-user',[Login::class,'loginUser'])->name ('login-user');
 Route::get('/member_dashboard',[Login::class,'member_dashboard']);
 Route::get('dashboard',[Login::class,'dashboard']);
-Route::post('/apply-loan',[ApplyLoan::Class,'applyLoan'])->name ('apply-loan');
+Route::post('/apply-loan',[ApplyLoan::class,'applyLoan'])->name ('apply-loan');
 Route::get("manager_registration", [RegisterManager::class,'index']);
-Route::post('manager_registration',[RegisterManager::Class,'registerManager']);
+Route::post('manager_registration',[RegisterManager::class,'registerManager']);
 Route::get("membership_applications", [MembershipApplications::class,'index']);
-Route::post('membership_applications',[MembershipApplications::Class,'storeMembershipApplication']);
+Route::post('membership_applications',[MembershipApplications::class,'storeMembershipApplication']);
 Route::get("approve_membership_applications", [ApproveMembershipApplications::class,'index']);
-Route::post('approve_membership_applications',[ApproveMembershipApplications::Class,'storeMembershipApplication']);
+Route::post('approve_membership_applications',[ApproveMembershipApplications::class,'storeMembershipApplication']);
 
 
 //Route::get('/registration',[MemberAuthentication::class,'registration']);
