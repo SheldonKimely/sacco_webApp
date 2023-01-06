@@ -28,6 +28,11 @@
 <!--===============================================================================================-->
 </head>
 <body>
+	@if(Session::has('fail'))
+	<div class="alert alert-fail">
+		{{Session::get('fail')}}
+	</div>
+	@endif
 	
 	<div class="limiter">
 		<div class="container-login100">
@@ -39,10 +44,10 @@
 					</span>
 
 					<span class="txt1 p-b-11">
-						Username
+						Email
 					</span>
-					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" >
+					<div class="wrap-input100 validate-input m-b-36" data-validate = "Email is required">
+						<input class="input100" type="text" name="email" >
 						<span class="focus-input100"></span>
 						<span class ="text-danger">@error('name') {{$message}} @enderror</span>
 					</div>
@@ -68,7 +73,7 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt3">
+							<a href="/change_password" class="txt3">
 								Forgot Password?
 							</a>
 						</div>

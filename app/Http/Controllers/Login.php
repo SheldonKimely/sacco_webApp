@@ -15,24 +15,24 @@ class Login extends Controller
         return view('login');
     }
     public function loginUser(Request $request){
-        $userMember = Member::where('nid', '=', $request->username)->first();
-        $userManager = Manager::where('email', '=', $request->username)->first();
+        $userMember = Member::where('nid', '=', $request->email)->first();
+        $userManager = Manager::where('email', '=', $request->email)->first();
         if($userMember){
             if (Hash::check($request->password,$userMember->password )){
                 $request->session()->put('loginId',$userMember->id);
                 return redirect('member_dashboard');
             }else{
-                return back()->with('fail','Incorrect Password'); 
+                return back()->with('fail','Incorrect Email or Password, Member. Please try again.'); 
             }
         }else if($userManager){
             if (Hash::check($request->password,$userManager->password )){
                 $request->session()->put('loginId',$userManager->manager_id);
                 return redirect('dashboard');
             }else{
-                return back()->with('fail','Incorrect Password'); 
+                return back()->with('fail','Incorrect Email or Password, Manager. Please try again'); 
             }
         }else{
-            return back()->with('fail','Username does not exist');
+            return back()->with('fail','Email does not exist');
         }
     }
     public function member_dashboard(){
