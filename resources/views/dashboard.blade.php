@@ -316,11 +316,6 @@
                                 </span></a>
                         </li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
-                                href="/change_password" aria-expanded="false"><i data-feather="lock"
-                                    class="feather-icon"></i><span class="hide-menu">Change Password
-                                </span></a>
-                        </li>
                         
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/income"
                                 aria-expanded="false"><i data-feather="edit-3" class="feather-icon"></i><span
