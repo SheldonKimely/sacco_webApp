@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Member;
+use App\Models\Manager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,35 +12,30 @@ class ChangePassword extends Controller
 {
     //
     public function index(){
-        $sessionData = array();
-        if (Session::has('loginId')) {
-            $sessionData = Member::where('id', '=', Session::get('loginId'))->first();
-        }
-        return view('change_password', compact('sessionData'));
+        return view('change_password');
     }
 
     public function changePassword(Request $request){
         $request->validate([
-            'email'=>'required',
-            'old_password'=>'required',
-            'new_password'=>'required',
-            'confirm_password'=>'required'
+            'email' => 'required',
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required|min:8',
         ]);
 
-        $user = Member::where('email', '=', $request->email)->first();
-        // $user = Member::find(Auth::user()->id);
-        $hashedPassword = $user->password;
-        if(Hash::check($request->old_password,$hashedPassword)){
-            if(!Hash::check($request->new_password,$hashedPassword)){
-                if($request->new_password == $request->confirm_password){
-                    $user->password = Hash::make($request->new_password);
-                    $user->save();
-                    Auth::logout();
-                    return redirect()->route('/login-user')->with('success','Password changed successfully');
-                }else{
-                    return back()->with('fail','New password and confirm password does not match');
-                }
+        $user = Manager::where('email', $request->email)->first();
+
+        if($user){
+            if($request->new_password == $request->confirm_password){
+                $user->password = Hash::make($request->new_password);
+                $user->save();
+                // Auth::logout();
+                return redirect()->route('/login-user')->with('success','Password changed successfully');
+            }else{
+                return back()->with('fail','New password and confirm password does not match');
             }
+        }
+        else{
+            return back()->with('fail','We do not recognize your email address');
         }
 
     }

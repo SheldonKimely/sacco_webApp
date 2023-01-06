@@ -35,6 +35,8 @@ Route::get("borrowed_loans", [BorrowedLoans::class,'index']);
 Route::get("contribute", [Contribute::class,'index']);
 Route::get("member_shares", [MemberShares::class,'index']);
 Route::post('/register-member',[MemberRegistration::class,'registerMember'])->name ('register-member');
+
+Route::get('/login-user',[Login::class,'index']);
 Route::post('/login-user',[Login::class,'loginUser'])->name ('login-user');
 Route::get('/member_dashboard',[Login::class,'member_dashboard']);
 Route::get('dashboard',[Login::class,'dashboard']);
@@ -46,8 +48,8 @@ Route::post('membership_applications',[MembershipApplications::class,'storeMembe
 Route::get("approve_membership_applications", [ApproveMembershipApplications::class,'index']);
 Route::post('approve_membership_applications',[ApproveMembershipApplications::class,'storeMembershipApplication']);
 
-Route::get("change_password", [ChangePassword::class,'index']);
-Route::post('change_password',[ChangePassword::class,'changePassword']);
+Route::get("/change_password", [ChangePassword::class,'index']);
+Route::post('/change_password',[ChangePassword::class,'changePassword'])-> name ('change_password');
 
 
 //Route::get('/registration',[MemberAuthentication::class,'registration']);
