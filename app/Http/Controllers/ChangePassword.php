@@ -29,7 +29,7 @@ class ChangePassword extends Controller
                 $user->password = Hash::make($request->new_password);
                 $user->save();
                 // Auth::logout();
-                return redirect()->route('/login-user')->with('success','Password changed successfully');
+                return redirect()->route('login-user')->with('success','Password changed successfully');
             }else{
                 return back()->with('fail','New password and confirm password does not match');
             }
